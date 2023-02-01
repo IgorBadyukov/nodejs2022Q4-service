@@ -10,7 +10,7 @@ import {
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 
-@Controller('users')
+@Controller('user')
 export class UsersController {
   @Get()
   getAll(): string {

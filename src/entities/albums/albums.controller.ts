@@ -7,9 +7,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { IAlbumBody } from '../../types/types';
+import { CreateAlbumDto } from './dto/create-album.dto';
+import { UpdateAlbumDto } from './dto/update-album.dto';
 
-@Controller('albums')
+@Controller('album')
 export class AlbumsController {
   @Get()
   getAll(): string {
@@ -17,22 +18,22 @@ export class AlbumsController {
   }
 
   @Get(':id')
-  getUser(@Param('id') id: string): string {
+  getAlbum(@Param('id') id: string): string {
     return 'This action returns one albums by id';
   }
 
   @Post()
-  createUser(@Body() createUserDto: IAlbumBody) {
+  createAlbum(@Body() createAlbum: CreateAlbumDto) {
     return;
   }
 
   @Put(':id')
-  updateUser(@Body() updateUserDto: IAlbumBody, @Param('id') id: string) {
+  updateAlbum(@Body() updateAlbum: UpdateAlbumDto, @Param('id') id: string) {
     return;
   }
 
   @Delete(':id')
-  removeUser(@Param('id') id: string) {
+  removeAlbum(@Param('id') id: string) {
     return;
   }
 }

@@ -28,6 +28,12 @@ export interface IAlbum {
   artistId: string | null; // refers to Artist
 }
 
+export interface IAlbumBody {
+  name: string;
+  year: number;
+  artistId: string | null;
+}
+
 export interface IFavorites {
   artists: string[]; // favorite artists ids
   albums: string[]; // favorite albums ids

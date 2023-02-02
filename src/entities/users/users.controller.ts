@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   HttpCode,
-  Logger,
   Param,
   Post,
   Put,
@@ -45,13 +44,13 @@ export class UsersController {
   async updateUser(
     @Body() updateUserDto: UpdateUserDto,
     @Param('id') id: string,
-  ) {
+  ): Promise<IUser> {
     return this.usersService.updateUser(updateUserDto, id);
   }
 
   @Delete(':id')
   @HttpCode(204)
-  async removeUser(@Param('id') id: string) {
+  async removeUser(@Param('id') id: string): Promise<string> {
     return this.usersService.removeUser(id);
   }
 }

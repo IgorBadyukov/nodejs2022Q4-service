@@ -3,40 +3,55 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
-import { CreateArtistDto } from './dto/create-artist.dto';
-import { UpdateArtistDto } from './dto/update-artist.dto';
+import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
+import { ArtistsService } from './artists.service';
+import { IArtist } from '../../types/types';
 
 @Controller('artist')
 export class ArtistsController {
+  constructor(private artistsService: ArtistsService) {}
+
   @Get()
-  getAll(): string {
-    return 'This action returns all albums';
+  @HttpCode(200)
+  async getAll(): Promise<IArtist[]> {
+    return this.artistsService.getAll();
   }
 
   @Get(':id')
-  getArtist(@Param('id') id: string): string {
-    return 'This action returns one albums by id';
+  @HttpCode(200)
+  async getArtist(@Param('id') id: string): Promise<IArtist> {
+    return this.artistsService.getArtist(id);
   }
 
   @Post()
-  createArtist(@Body() createArtistDto: CreateArtistDto) {
-    return;
+  @HttpCode(201)
+  @UsePipes(ValidationPipe)
+  async createArtist(
+    @Body() createArtistDto: CreateUpdateArtistDto,
+  ): Promise<IArtist> {
+    return this.artistsService.createArtist(createArtistDto);
   }
 
   @Put(':id')
-  updateArtist(
-    @Body() updateArtistDto: UpdateArtistDto,
+  @HttpCode(200)
+  @UsePipes(ValidationPipe)
+  async updateArtist(
+    @Body() updateArtistDto: CreateUpdateArtistDto,
     @Param('id') id: string,
-  ) {
-    return;
+  ): Promise<IArtist> {
+    return this.artistsService.updateArtist(updateArtistDto, id);
   }
 
+  @HttpCode(204)
   @Delete(':id')
-  removeArtist(@Param('id') id: string) {
-    return;
+  async removeArtist(@Param('id') id: string) {
+    return this.artistsService.removeArtist(id);
   }
 }

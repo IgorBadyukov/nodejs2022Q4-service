@@ -77,7 +77,7 @@ export class UsersService {
   }
 
   removeUser(id: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       if (!uuidValidateV4(id)) {
         reject(new HttpException('ID not valid', 400));
       }

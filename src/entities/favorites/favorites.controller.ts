@@ -1,16 +1,10 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
 
 @Controller('favs')
-export class FavouritesController {
+export class FavoritesController {
   @Get()
   getAll(): string {
-    return 'This action returns all favourites';
+    return 'This action returns all favorites';
   }
 
   @Post('track/:id')

@@ -3,37 +3,55 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
+  Logger,
   Param,
   Post,
   Put,
+  UsePipes,
+  ValidationPipe,
 } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersService } from './users.service';
+import { IUser } from '../../types/types';
 
 @Controller('user')
 export class UsersController {
+  constructor(private usersService: UsersService) {}
+
   @Get()
-  getAll(): string {
-    return 'This action returns all users';
+  @HttpCode(200)
+  async getAll(): Promise<IUser[]> {
+    return this.usersService.getAll();
   }
 
   @Get(':id')
-  getUser(@Param('id') id: string): string {
-    return 'This action returns one user by id';
+  @HttpCode(200)
+  async getUser(@Param('id') id: string): Promise<IUser> {
+    return this.usersService.getUser(id);
   }
 
   @Post()
-  createUser(@Body() createUserDto: CreateUserDto) {
-    return;
+  @HttpCode(201)
+  @UsePipes(ValidationPipe)
+  async createUser(@Body() createUserDto: CreateUserDto): Promise<IUser> {
+    return this.usersService.createUser(createUserDto);
   }
 
   @Put(':id')
-  updateUser(@Body() updateUserDto: UpdateUserDto, @Param('id') id: string) {
-    return;
+  @HttpCode(200)
+  @UsePipes(ValidationPipe)
+  async updateUser(
+    @Body() updateUserDto: UpdateUserDto,
+    @Param('id') id: string,
+  ) {
+    return this.usersService.updateUser(updateUserDto, id);
   }
 
   @Delete(':id')
-  removeUser(@Param('id') id: string) {
-    return;
+  @HttpCode(204)
+  async removeUser(@Param('id') id: string) {
+    return this.usersService.removeUser(id);
   }
 }

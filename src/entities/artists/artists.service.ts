@@ -59,8 +59,8 @@ export class ArtistsService {
       if (!artist) {
         reject(new HttpException('Artist not found', 404));
       }
-      for (let i = 0; i < users.length; i++) {
-        if (artist[i].id === id) {
+      for (let i = 0; i < artists.length; i++) {
+        if (artists[i].id === id) {
           artists[i].name = artistDto.name;
           artists[i].grammy = artistDto.grammy;
           resolve(artists[i]);
@@ -78,8 +78,8 @@ export class ArtistsService {
       if (!artist) {
         reject(new HttpException('Artist not found', 404));
       }
-      users.forEach((elem, i) => {
-        if (elem.id === id) users.splice(i, 1);
+      artists.forEach((elem, i) => {
+        if (elem.id === id) artists.splice(i, 1);
       });
       resolve('Artist deleted successfully');
     });

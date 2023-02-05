@@ -11,7 +11,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { TracksService } from './tracks.service';
-import { IArtist, ITrack } from '../../types/types';
+import { IArtist, ITrack } from '../../utils/types/types';
 import { CreateUpdateArtistDto } from '../artists/dto/create-update-artist.dto';
 import {CreateUpdateTrackDto} from "./dto/create-update-track.dto";
 

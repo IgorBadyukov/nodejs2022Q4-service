@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
 import { ArtistsService } from './artists.service';
-import { IArtist } from '../../types/types';
+import { IArtist } from '../../utils/types/types';
 
 @Controller('artist')
 export class ArtistsController {

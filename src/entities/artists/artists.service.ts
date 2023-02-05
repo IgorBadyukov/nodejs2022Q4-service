@@ -1,17 +1,10 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { IArtist, IUser } from '../../types/types';
+import { IArtist, IUser } from '../../utils/types/types';
 import { artists } from '../../data/artists';
-import {
-  v4 as uuidv4,
-  validate as uuidValidate,
-  version as uuidVersion,
-} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { CreateUpdateArtistDto } from './dto/create-update-artist.dto';
-import { users } from '../../data/users';
+import {uuidValidateV4} from "../../utils/utils";
 
-function uuidValidateV4(uuid: string) {
-  return uuidValidate(uuid) && uuidVersion(uuid) === 4;
-}
 
 @Injectable()
 export class ArtistsService {

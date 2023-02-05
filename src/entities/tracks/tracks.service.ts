@@ -1,19 +1,9 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { IArtist, ITrack } from '../../types/types';
-import { artists } from '../../data/artists';
-import { CreateUpdateArtistDto } from '../artists/dto/create-update-artist.dto';
-import {
-  v4 as uuidv4,
-  validate as uuidValidate,
-  version as uuidVersion,
-} from 'uuid';
-import { users } from '../../data/users';
-import { tracks } from "../../data/tracks";
-import { CreateUpdateTrackDto } from "./dto/create-update-track.dto";
-
-function uuidValidateV4(uuid: string) {
-  return uuidValidate(uuid) && uuidVersion(uuid) === 4;
-}
+import { ITrack } from '../../utils/types/types';
+import { v4 as uuidv4 } from 'uuid';
+import { tracks } from '../../data/tracks';
+import { CreateUpdateTrackDto } from './dto/create-update-track.dto';
+import { uuidValidateV4 } from '../../utils/utils';
 
 @Injectable()
 export class TracksService {
@@ -68,12 +58,12 @@ export class TracksService {
       }
       const track = tracks.find((u) => u.id === id);
       if (!track) {
-        reject(new HttpException('Artist not found', 404));
+        reject(new HttpException('Track not found', 404));
       }
       tracks.forEach((elem, i) => {
         if (elem.id === id) tracks.splice(i, 1);
       });
-      resolve('Artist deleted successfully');
+      resolve('Track deleted successfully');
     });
   }
 }

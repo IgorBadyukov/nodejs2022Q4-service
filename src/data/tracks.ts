@@ -1,3 +1,3 @@
-import { ITrack } from '../types/types';
+import { ITrack } from '../utils/types/types';
 
 export const tracks = [] as ITrack[];

@@ -1,17 +1,10 @@
 import { HttpException, Injectable } from '@nestjs/common';
-import { IAlbum } from '../../types/types';
+import { IAlbum } from '../../utils/types/types';
 import { albums } from '../../data/albums';
 import { CreateUpdateAlbumDto } from './dto/create-update-album.dto';
-import {
-  v4 as uuidv4,
-  validate as uuidValidate,
-  version as uuidVersion,
-} from 'uuid';
-import { users } from '../../data/users';
-
-function uuidValidateV4(uuid: string) {
-  return uuidValidate(uuid) && uuidVersion(uuid) === 4;
-}
+import { uuidValidateV4 } from '../../utils/utils';
+import { v4 as uuidv4 } from 'uuid';
+import {tracks} from "../../data/tracks";
 
 @Injectable()
 export class AlbumsService {
@@ -43,6 +36,7 @@ export class AlbumsService {
       resolve(newAlbum);
     });
   }
+
   async updateAlbum(albumDto: CreateUpdateAlbumDto, id: string) {
     return new Promise<IAlbum>((resolve, reject) => {
       if (!uuidValidateV4(id)) {
@@ -72,6 +66,10 @@ export class AlbumsService {
       if (!album) {
         reject(new HttpException('Album not found', 404));
       }
+      albums.forEach((elem, i) => {
+        if (elem.id === id) albums.splice(i, 1);
+      });
+      resolve('Album deleted successfully');
     });
   }
 }

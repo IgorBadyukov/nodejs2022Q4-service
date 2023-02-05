@@ -2,11 +2,11 @@ import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUpdateAlbumDto {
-  @IsNotEmpty({ message: 'Body need to have fields name' })
+  @IsString({ message: 'Body need to have fields name (type string)' })
   @ApiProperty()
   name: string;
 
-  @IsNotEmpty({ message: 'Body need to have fields name' })
+  @IsString({ message: 'Body need to have fields year (type number)' })
   @ApiProperty()
   year: number;
 

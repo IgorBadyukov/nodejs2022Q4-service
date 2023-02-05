@@ -1,9 +1,9 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateUserDto {
-  @IsNotEmpty({ message: 'Body need to have login' })
+  @IsString({ message: 'Body need to have login' })
   login: string;
 
-  @IsNotEmpty({ message: 'Body need to have password' })
+  @IsString({ message: 'Body need to have password' })
   password: string;
 }
